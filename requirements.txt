@@ -1,4 +1,8 @@
 fastapi
 pandas
-
--e .
+matplotlib
+seaborn
+catboost
+xgboost
+scikit-learn
+#-e .
