@@ -5,6 +5,8 @@ from src.logger1.logger import logging
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
+from src.compontents.model_trainer import ModelTrainer
+from src.compontents.model_trainer import ModelTrainerConfig
 from src.compontents.data_transformation import DataTransformationConfig
 from src.compontents.data_transformation import DataTransformation
 
@@ -47,4 +49,8 @@ if __name__=='__main__':
     obj=DataIngestion(DataingestionConfig())
     trian_data,test_data=obj.inititate_data_ingestion()
     data_transformation=DataTransformation(DataTransformationConfig())
-    data_transformation.initiate_data_transformation(train_path=trian_data,test_path=test_data)
+    train_arr,test_arr=data_transformation.initiate_data_transformation(train_path=trian_data,test_path=test_data)
+    model_trainer=ModelTrainer(ModelTrainerConfig())
+    r2=model_trainer.initiate_model_trainer(train_arr=train_arr,test_arr=test_arr)
+    print(r2)
+
