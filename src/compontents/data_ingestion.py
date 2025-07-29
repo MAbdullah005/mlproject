@@ -1,6 +1,7 @@
 import os
 import sys
 from src.expection.expection import CustomExpection
+from time import time
 from src.logger1.logger import logging
 import pandas as pd
 from sklearn.model_selection import train_test_split
@@ -46,11 +47,14 @@ class DataIngestion:
         
 
 if __name__=='__main__':
+    strrt=time()
     obj=DataIngestion(DataingestionConfig())
     trian_data,test_data=obj.inititate_data_ingestion()
     data_transformation=DataTransformation(DataTransformationConfig())
     train_arr,test_arr=data_transformation.initiate_data_transformation(train_path=trian_data,test_path=test_data)
     model_trainer=ModelTrainer(ModelTrainerConfig())
     r2=model_trainer.initiate_model_trainer(train_arr=train_arr,test_arr=test_arr)
+    finsh=time()
+    logging.info(f"trained in time {strrt-finsh}")
     print(r2)
 
